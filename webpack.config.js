@@ -3,7 +3,7 @@ var path = require('path');
 var production = process.env.NODE_ENV === 'production';
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractPlugin = require('extract-text-webpack-plugin');
-var host = (process.env.HOST || '0.0.0.0');
+var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT) || 3000;
 
 var plugins = [
@@ -73,7 +73,7 @@ module.exports = {
         path: path.resolve(__dirname, 'src'),
         filename:  production ? '[name].min.js' : '[name].js',
         chunkFilename: '[name]-[chunkhash].js',
-        publicPath: '/assets',
+        publicPath: '/assets/',
     },
     plugins: plugins,
     devServer: {

@@ -12,24 +12,27 @@ import { Provider } from 'react-redux';
 import { fetchComponentDataBeforeRender } from '../common/api/fetchComponentDataBeforeRender'
 import createStore from '../client/store/createStore'
 import routes from './serverRoutes'
+// import createRoutes from '../client/routes'
 
 const app = express()
 const renderFullPage = (html, initialState) => {
-  const publicPath = process.env.NODE_ENV !== 'production' ? 'http://0.0.0.0:3000' : ''
+  const publicPath = process.env.NODE_ENV !== 'production' ? '//localhost:' : ''
+  const port = process.env.PORT || 3000
+  const assetPath = publicPath + port
   return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
         <title>incity</title>
-        <link rel="stylesheet" type="text/css" href="${publicPath}/assets/incity.css">
+        <link rel="stylesheet" type="text/css" href="${assetPath}/assets/incity.css">
       </head>
       <body>
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
-        <script src="${publicPath}/assets/incity.js"></script>
+        <script src="${assetPath}/assets/incity.js"></script>
       </body>
     </html>
   `

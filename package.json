@@ -5,7 +5,8 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon --exec node src/server/index.js --progress --colors --profile",
-    "dev": "NODE_ENV=development node src/server/index.js --progress --colors --profile"
+    "dev": "NODE_ENV=development nodemon src/server/index.js",
+    "dev-windows": "SET NODE_ENV=development&&nodemon src/server/index.js"
   },
   "dependencies": {
     "babel": "^6.5.2",
