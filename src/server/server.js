@@ -11,8 +11,8 @@ import { RouterContext, match, browserHistory } from 'react-router'
 import { Provider } from 'react-redux';
 import { fetchComponentDataBeforeRender } from '../common/api/fetchComponentDataBeforeRender'
 import createStore from '../client/store/createStore'
-import routes from './serverRoutes'
-// import createRoutes from '../client/routes'
+//import routes from './serverRoutes'
+import createRoutes from '../client/routes'
 
 const app = express()
 const renderFullPage = (html, initialState) => {
@@ -49,8 +49,8 @@ if(process.env.NODE_ENV !== 'production'){
 app.get('/*', function (req, res) {
   
   const store = createStore({}, browserHistory);
-
-  match({ routes, location: req.originalUrl }, (err, redirectLocation, renderProps) => {
+  
+  match({ routes:createRoutes(store), location: req.originalUrl }, (err, redirectLocation, renderProps) => {
 
     if(err) {
       console.error(err);

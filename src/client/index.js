@@ -36,27 +36,9 @@ let render = (routerKey = null) => {
   )
 }
 
-// Enable HMR and catch runtime errors in RedBox
-// This code is excluded from production bundle
-// if (__DEVELOPMENT__ && module.hot) {
-//   const renderApp = render
-//   const renderError = (error) => {
-//     const RedBox = require('redbox-react')
-//     ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
-//   }
-//   render = () => {
-//     try {
-//       renderApp(Math.random())
-//     } catch (error) {
-//       renderError(error)
-//     }
-//   }
-//   module.hot.accept(['./routes/index'], () => render())
-// }
-
 render()
 
-if (process.env.NODE_ENV !== 'production') {
+if (__DEVTOOLS__) {
   const showDevTools = require('./showDevTools').default;
   showDevTools(store);
 }
