@@ -11,12 +11,13 @@ import { RouterContext, match, browserHistory } from 'react-router'
 import { Provider } from 'react-redux';
 import { fetchComponentDataBeforeRender } from '../common/api/fetchComponentDataBeforeRender'
 import createStore from '../client/store/createStore'
-//import routes from './serverRoutes'
 import createRoutes from '../client/routes'
 
 const app = express()
+const isDeveloping = process.env.NODE_ENV == 'development';
+
 const renderFullPage = (html, initialState) => {
-  const publicPath = process.env.NODE_ENV !== 'production' ? '//localhost:' : ''
+  const publicPath = isDeveloping ? '//localhost:' : ''
   const port = process.env.PORT || 3000
   const assetPath = publicPath + port
   return `
@@ -32,13 +33,14 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
+        <script src="${assetPath}/assets/${ isDeveloping ? 'vendor.js' : 'vendor.min.js'}"></script>
         <script src="${assetPath}/assets/incity.js"></script>
       </body>
     </html>
   `
 }
 
-if(process.env.NODE_ENV !== 'production'){
+if(isDeveloping){
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));

@@ -4,16 +4,15 @@ var production = process.env.NODE_ENV === 'production';
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractPlugin = require('extract-text-webpack-plugin');
 var host = (process.env.HOST || 'localhost');
-var port = (+process.env.PORT) || 3000;
+var port = (process.env.PORT) || 3000;
 
 var plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-        name:'cityVendors', 
-        children:  true,
-        minChunks: 2, 
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        filename : production ? 'vendor.min.js': 'vendor.js'
+    }),
     new webpack.NoErrorsPlugin(),
     new ExtractPlugin('[name].css',{allChunks: true}), 
     // This plugins defines various variables that we can set to false
@@ -35,7 +34,7 @@ if (production) {
     plugins = plugins.concat([
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.MinChunkSizePlugin({
-            minChunkSize: 51200, 
+            minChunkSize: 12000, 
         }),
         new webpack.optimize.UglifyJsPlugin({
             mangle:   true,
@@ -65,7 +64,6 @@ module.exports = {
             'react-router-redux',
             'redux'
         ]
-
     },
     resolve: {
     	extensions: ["", ".js", ".jsx"]
@@ -73,7 +71,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'src'),
         filename:  production ? '[name].min.js' : '[name].js',
-        chunkFilename: '[name]-[chunkhash].js',
+        chunkFilename: '[name]-[chunkhash].chunk.js',
         publicPath: '/assets/',
     },
     plugins: plugins,
@@ -95,7 +93,8 @@ module.exports = {
         loaders: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
+				//exclude: /node_modules/,
+                include: path.join(__dirname, 'src'),
 				loaders: ["react-hot","babel"]
 			},
 			{
