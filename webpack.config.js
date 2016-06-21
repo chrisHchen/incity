@@ -1,23 +1,22 @@
 var webpack = require('webpack');
-var path = require('path');
-var production = process.env.NODE_ENV === 'production';
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
 var host = (process.env.HOST || 'localhost');
 var port = (process.env.PORT) || 3000;
+var production = process.env.NODE_ENV === 'production';
 
 var plugins = [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        filename : production ? 'vendor.min.js': 'vendor.js'
+        filename : production ? 'vendor.min.js': 'vendor.js',
+        minChunks : 2
     }),
     new webpack.NoErrorsPlugin(),
-    new ExtractPlugin('[name].css',{allChunks: true}), 
-    // This plugins defines various variables that we can set to false
-    // in production to avoid code related to them from being compiled
-    // in our final bundle
+    new ExtractPlugin('[name].min.css',{allChunks: true}), 
+
     new webpack.DefinePlugin({
         __SERVER__:      !production,
         __DEVELOPMENT__: !production,
@@ -59,17 +58,18 @@ module.exports = {
         incity:entery,
         vendor:[
             'react',
-            'react-redux',
+            'react-dom',
             'react-router',
-            'react-router-redux',
-            'redux'
+            'redux',
+            'react-redux',
+            'react-router-redux'
         ]
     },
     resolve: {
     	extensions: ["", ".js", ".jsx"]
   	},
     output: {
-        path: path.resolve(__dirname, 'src'),
+        path: path.resolve(__dirname, 'assets'),
         filename:  production ? '[name].min.js' : '[name].js',
         chunkFilename: '[name]-[chunkhash].chunk.js',
         publicPath: '/assets/',
@@ -83,18 +83,11 @@ module.exports = {
 		reason: true
 	},
     module: {
-    	// preLoaders: [
-	    //   {
-	    //     test: /\.(js|jsx)$/,
-	    //     loader: 'eslint-loader',
-	    //     exclude: /node_modules/
-	    //   },
-	    // ],
         loaders: [
 			{
 				test: /\.(js|jsx)$/,
-				//exclude: /node_modules/,
-                include: path.join(__dirname, 'src'),
+				exclude: /node_modules/,
+                // include: path.join(__dirname, 'src'),
 				loaders: ["react-hot","babel"]
 			},
 			{

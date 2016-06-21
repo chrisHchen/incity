@@ -1,4 +1,4 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from '../../store/makeRootReducer'
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
 

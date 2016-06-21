@@ -2,21 +2,9 @@ import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
 
-/*  Note: Instead of using JSX, we recommend using react-router
-    PlainRoute objects to build route definitions.   */
-
-// export const createRoutes = (store) => ({
-//   path: '/',
-//   component: CoreLayout,
-//   indexRoute: Home,
-//   childRoutes: [
-//     CounterRoute(store)
-//   ]
-// })
-
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
-
+// root route
 export const createRoutes = (store) => ({
   path: '/',
   component: CoreLayout,

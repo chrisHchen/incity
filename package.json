@@ -7,7 +7,8 @@
     "start": "NODE_ENV=development nodemon --exec node src/server/index.js --progress --colors --profile",
     "dev": "NODE_ENV=development nodemon src/server/index.js",
     "dev-windows": "SET NODE_ENV=development&&nodemon src/server/index.js",
-    "prd": "NODE_ENV=development babel-node src/server/server.js"
+    "prd": "NODE_ENV=production babel-node src/server/server.js",
+    "build": "NODE_ENV=production webpack -p --progress --colors --profile && npm run prd"
   },
   "dependencies": {
     "babel": "^6.5.2",
@@ -38,6 +39,7 @@
     "react-redux": "2.1.2",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.5",
+    "redial": "^0.4.2",
     "redux": "^3.5.0",
     "redux-thunk": "^0.1.0",
     "serve-static": "^1.10.0",
@@ -46,6 +48,7 @@
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "babel-plugin-react-transform": "^2.0.2",
+    "babel-polyfill": "^6.9.1",
     "clean-webpack-plugin": "^0.1.9",
     "css-loader": "^0.23.1",
     "eslint": "^2.9.0",
