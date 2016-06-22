@@ -15,7 +15,7 @@ var plugins = [
         minChunks : 2
     }),
     new webpack.NoErrorsPlugin(),
-    new ExtractPlugin('[name].min.css',{allChunks: true}), 
+    new ExtractPlugin( production ? '[name].min.css' : '[name].css',{allChunks: true}), 
 
     new webpack.DefinePlugin({
         __SERVER__:      !production,
@@ -76,7 +76,7 @@ module.exports = {
     },
     plugins: plugins,
     devServer: {
-	    hot: true,
+	    hot: !production,
 	},
 	stats:{
 		color: true,

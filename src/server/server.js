@@ -10,8 +10,8 @@ import { renderToString } from 'react-dom/server'
 import { createMemoryHistory, RouterContext, match, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { trigger } from 'redial'
-import createStore from '../client/store/createStore'
-import createRoutes from '../client/routes'
+import createStore from '../store/createStore'
+import createRoutes from '../routes'
 
 const app = express()
 const isDeveloping = process.env.NODE_ENV == 'development'

@@ -1,10 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
-import createLogger from 'redux-logger';
-import DevTools from '../containers/DevTools';
+import createLogger from 'redux-logger'
+import DevTools from '../client/DevTools'
 import makeRootReducer from './makeRootReducer'
-import { callAPIMiddleware } from '../middleware/callAPIMiddleware';
+import { callAPIMiddleware } from '../middleware/callAPIMiddleware'
 
 export default (initialState = {}, history) => {
   //https://github.com/reactjs/react-router-redux

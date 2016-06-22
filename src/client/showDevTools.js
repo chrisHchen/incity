@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import DevTools from './containers/DevTools'
+import DevTools from './DevTools'
 
 export default function showDevTools(store) {
   const popup = window.open(

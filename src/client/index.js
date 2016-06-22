@@ -4,10 +4,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { match, Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import createStore from './store/createStore'
+import createStore from '../store/createStore'
 import { Provider } from 'react-redux';
 
-import './components/Header/Header.scss'
+import '../components/Header/Header.scss'
 
 const initialState = window.__INITIAL_STATE__;
 const store = createStore(initialState, browserHistory)
@@ -27,7 +27,7 @@ if (__DEBUG__) {
 
 let render = () => {
   // We need to have a root route for HMR to work.
-  const routes = require('./routes/index').default(store)
+  const routes = require('../routes/index').default(store)
 
   // Pull child routes using match. Adjust Router for vanilla webpack HMR,
   // in development using a new key every time there is an edit.
@@ -58,7 +58,6 @@ let render = () => {
           // Allow lifecycle hooks to dispatch Redux actions:
           dispatch,
         };
-
       // Don't fetch data for initial route, server has already done the work:
       if (window.INITIAL_STATE) {
         // Delete initial data so that subsequent data fetches can occur:
@@ -67,17 +66,16 @@ let render = () => {
         // Fetch mandatory data dependencies for 2nd route change onwards:
         trigger('fetch', components, locals);
       }
-
       // Fetch deferred, client-only data dependencies:
       trigger('defer', components, locals);
-    });
-  });
+    })
+  })
 }
 
 if (module.hot) {
-  module.hot.accept('./routes/index', () => {
+  module.hot.accept('../routes/index', () => {
     setTimeout(render);
-  });
+  })
 }
 
 render()
