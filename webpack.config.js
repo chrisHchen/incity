@@ -43,7 +43,7 @@ if (production) {
                 warnings: false, // Suppress uglification warnings
             },
         }),
-        new CleanPlugin('assets'),
+        new CleanPlugin('build'),
     ]);
 }
 
@@ -69,10 +69,10 @@ module.exports = {
     	extensions: ["", ".js", ".jsx"]
   	},
     output: {
-        path: path.resolve(__dirname, 'assets'),
+        path: path.resolve(__dirname, 'build'),
         filename:  production ? '[name].min.js' : '[name].js',
         chunkFilename: '[name]-[chunkhash].chunk.js',
-        publicPath: '/assets/',
+        publicPath: '/build/',
     },
     plugins: plugins,
     devServer: {

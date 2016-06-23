@@ -1,6 +1,6 @@
 import config from '../config'
 
-const mongoose = require( 'mongoose' )
+import mongoose from 'mongoose'
 // Build the connection string
 const dbURI = config.dbURI
 // Create the database connection
@@ -22,4 +22,4 @@ process.on('SIGINT', () =>  {
    })
 })
 
-exports default mongoose
+export default mongoose
