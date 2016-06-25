@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt-nodejs'
 const Schema = mongoose.Schema
 const SALT_WORK_FACTOR = 10
 const UserSchema = new Schema({
-	name:{
+	userName:{
 		unique:true,
 		type:String
 	},

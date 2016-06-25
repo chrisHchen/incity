@@ -14,15 +14,15 @@ const renderFullPage = (html, initialState) => {
       <head>
         <meta charset="utf-8">
         <title>incity</title>
-        <link rel="stylesheet" type="text/css" href="/assets/${ isDeveloping ? 'incity.css' : 'incity.min.css'}">
+        <link rel="stylesheet" type="text/css" href="/build/${ isDeveloping ? 'incity.css' : 'incity.min.css'}">
       </head>
       <body>
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
-        <script src="/assets/${ isDeveloping ? 'vendor.js' : 'vendor.min.js'}"></script>
-        <script src="/assets/${ isDeveloping ? 'incity.js' : 'incity.min.js'}"></script>
+        <script src="/build/${ isDeveloping ? 'vendor.js' : 'vendor.min.js'}"></script>
+        <script src="/build/${ isDeveloping ? 'incity.js' : 'incity.min.js'}"></script>
       </body>
     </html>
   `

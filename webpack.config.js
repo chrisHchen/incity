@@ -1,10 +1,10 @@
-var webpack = require('webpack');
-var CleanPlugin = require('clean-webpack-plugin');
-var ExtractPlugin = require('extract-text-webpack-plugin');
-var path = require('path');
-var host = (process.env.HOST || 'localhost');
+var webpack = require('webpack')
+var CleanPlugin = require('clean-webpack-plugin')
+var ExtractPlugin = require('extract-text-webpack-plugin')
+var path = require('path')
+var host = (process.env.HOST || 'localhost')
 var port = (process.env.PORT) || 3000;
-var production = process.env.NODE_ENV === 'production';
+var production = process.env.NODE_ENV === 'production'
 
 var plugins = [
     new webpack.optimize.OccurenceOrderPlugin(),

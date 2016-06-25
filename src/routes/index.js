@@ -12,7 +12,8 @@ export const createRoutes = (store) => ({
   getChildRoutes(location, cb){
     require.ensure([], (require) => {
       cb(null,[
-        require('./Counter').default(store)
+        require('./Counter').default(store),
+        require('./register').default(store),
       ])
     })
   }

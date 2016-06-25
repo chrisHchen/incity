@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import 'babel-polyfill'
 import express from 'express'
 import serveStatic from 'serve-static'
 import bodyParser from 'body-parser'
@@ -11,6 +11,8 @@ import webpack from 'webpack'
 import webpackConfig from '../../webpack.config'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+
+import router from './config/router'
 
 const app = express()
 const port = process.PORT || 3000
@@ -25,10 +27,9 @@ if( isDeveloping ){
 }
 
 app.use(compression())
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(require('cookie-parser')('gf'));
-
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(require('cookie-parser')('gf'))
 
 app.use( session({
   secret:'gf',
@@ -50,17 +51,17 @@ app.use( session({
 
 if( isDeveloping ){
   const compiler = webpack(webpackConfig);
-  app.use( webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }) );
+  app.use( webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }) )
   app.use( webpackHotMiddleware(compiler) );
 }else{
-  app.use( serveStatic(path.join(__dirname, 'assets')) );
+  app.use( serveStatic(path.join(__dirname, 'assets')) )
 }
 
 //import router
-require('./config/router')(app)
+router(app)
 
-const server = app.listen( port, function () {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('incity app listening at http://%s:%s', host, port);
+const server = app.listen( port, () => {
+  const host = server.address().address
+  const port = server.address().port
+  console.log('incity app listening at http://%s:%s', host, port)
 })

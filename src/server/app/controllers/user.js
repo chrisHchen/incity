@@ -3,10 +3,10 @@ import User from '../models/user'
 const signup = (req, res) => {
 	const _user = {}
 
-	_user.name = req.body.name
+	_user.userName = req.body.userName
 	_user.password = req.body.password
 
-	User.findOne({name:_user.name}, function(err, user){
+	User.findOne({userName:_user.userName}, function(err, user){
 		if(err){
 			console.log(err)
 			return
@@ -39,10 +39,10 @@ const signup = (req, res) => {
 
 const signin = (req, res) => {
 	var _user = req.body
-	var name = _user.name
+	var userName = _user.userName
 	var password = _user.password
 
-	User.findOne({name:name}, function(err, user){
+	User.findOne({userName:userName}, function(err, user){
 		if(err){
 			console.log(err)
 			return
@@ -81,7 +81,7 @@ const signin = (req, res) => {
 const signinRequired = function(req, res, next){
 	const user = req.session.user
 	if(!user){
-		return res.redirect('/login')
+		return res.redirect('/register')
 	}
 	next()
 }
