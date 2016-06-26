@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 
 export const Header = () => (
   <div>
-    <h1>React Redux Starter Kit</h1>
+    <h1>INCITY</h1>
     <IndexLink to='/'>
       Home
     </IndexLink>

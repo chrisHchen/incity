@@ -1,8 +1,7 @@
 import User from '../models/user'
 
-const signup = (req, res) => {
+const register = (req, res) => {
 	const _user = {}
-
 	_user.userName = req.body.userName
 	_user.password = req.body.password
 
@@ -94,4 +93,4 @@ const adminRequired = function(req, res, next){
 	next()
 }
 
-export { signup, signin, signinRequired, adminRequired}
+export { register, signin, signinRequired, adminRequired}

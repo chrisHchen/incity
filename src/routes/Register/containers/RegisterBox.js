@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
-import { getValue } from '../actions'
+import { getValue, submitReg } from '../actions'
 
-let RegisterBox = ({ handleChange }) =>{
+let RegisterBox = ({ handleChange, submitReg }) =>{
 
 	return(
 			<div>
@@ -13,7 +13,7 @@ let RegisterBox = ({ handleChange }) =>{
 				<Label>用户名</Label><Input  onChange={handleChange('userName')}/>
 				<Label>密码</Label><Input  onChange={handleChange('password')} type='password'/>
 				<div>
-					<a>提交</a>
+					<button onClick={submitReg}>提交</button>
 				</div>
 			</div>
 	)
@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			dispatch(
 				getValue(name, e.target.value)
 			)
+		},
+		submitReg : () => {
+			dispatch( submitReg() )
 		}
 	}
 }
