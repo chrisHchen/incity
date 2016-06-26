@@ -13,7 +13,8 @@ export const createRoutes = (store) => ({
     require.ensure([], (require) => {
       cb(null,[
         require('./Counter').default(store),
-        require('./register').default(store),
+        require('./Register').default(store),
+        require('./Login').default(store),
       ])
     })
   }

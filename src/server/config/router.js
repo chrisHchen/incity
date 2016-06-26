@@ -11,8 +11,11 @@ export default function(app){
 		if( config.apiUrl.indexOf(req.path) >= 0 ){
 			return next()
 		}
-		if(!req.session.user && req.path !== '/register'){
-			return res.redirect('/register')
+		if(!req.session.user && req.path !== '/login'){
+			return res.redirect('/login')
+		}
+		if(req.session.user && config.noRedirectView.indexOf(req.path) >= 0 ){
+			return res.redirect('/')
 		}
 		next()
 	})

@@ -49,7 +49,7 @@ UserSchema.pre('save', function(next){
 })
 
 UserSchema.methods = {
-	comparePassword: (_password, cb) => {
+	comparePassword: function(_password, cb) {
 		bcrypt.compare(_password, this.password, function(err, isMatch){
 			if(err) return cb(err)
 			cb(null,isMatch)
@@ -58,8 +58,12 @@ UserSchema.methods = {
 }
 
 UserSchema.statics = {
-	fetch: (cb) => this.find({}).sort('meta.updateAt').exec(cb),
-	fetchById: (id, cb) => this.find({_id:id}).exec(cb)
+	fetch: function(cb){
+		return this.find({}).sort('meta.updateAt').exec(cb)
+	},
+	fetchById: function(id, cb){
+		return this.find({_id:id}).exec(cb)
+	}
 }
 
 export default UserSchema

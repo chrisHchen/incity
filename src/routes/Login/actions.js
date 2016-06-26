@@ -1,20 +1,20 @@
-import { GET_REG_VALUE } from '../constants'
+import { GET_LOGIN_VALUE } from '../constants'
 import { replace } from 'react-router-redux'
 import { fetchJson } from '../../common/fetchUtil' 
 export const getValue = (name, value) => {
 	return {	
-		type: GET_REG_VALUE,
+		type: GET_LOGIN_VALUE,
 		key : name,
 		[name]: value
 	}
 }
 
-export const submitReg = () => {
+export const submitLogin = () => {
 	return (disptach, getState) => {
 		fetchJson({
-			url : '/user/register',
+			url : '/user/signin',
 			type: 'POST',
-			data: getState().register.toObject(),
+			data: getState().login.toObject(),
 			success : (res) => {
 				if(res.isSuccess){
 					disptach( replace('/') )
