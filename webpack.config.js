@@ -42,6 +42,9 @@ if (production) {
                 dead_code: true,
                 warnings: false, // Suppress uglification warnings
             },
+            output: {
+                comments: false,  // remove all comments
+            },
         }),
         new CleanPlugin('build'),
     ]);
