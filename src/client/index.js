@@ -7,7 +7,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from '../store/createStore'
 import { Provider } from 'react-redux';
 
-import '../components/Header/Header.scss'
 
 const initialState = window.__INITIAL_STATE__;
 const store = createStore(initialState, browserHistory)

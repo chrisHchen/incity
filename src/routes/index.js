@@ -1,6 +1,5 @@
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
-import CounterRoute from './Counter'
 
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
@@ -12,7 +11,6 @@ export const createRoutes = (store) => ({
   getChildRoutes(location, cb){
     require.ensure([], (require) => {
       cb(null,[
-        require('./Counter').default(store),
         require('./Register').default(store),
         require('./Login').default(store),
       ])

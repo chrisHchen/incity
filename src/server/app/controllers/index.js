@@ -13,6 +13,9 @@ const renderFullPage = (html, initialState) => {
     <html>
       <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <title>incity</title>
         <link rel="stylesheet" type="text/css" href="/build/${ isDeveloping ? 'incity.css' : 'incity.min.css'}">
       </head>
