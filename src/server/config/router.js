@@ -1,6 +1,7 @@
 import { signinRequired } from '../app/controllers/user'
 import Index from '../app/controllers/index'
 import {register, signin} from '../app/controllers/user'
+import {genUpToken, uploadCallback} from '../app/controllers/upload'
 import config from '../../config'
 
 export default function(app){
@@ -26,4 +27,8 @@ export default function(app){
 	//user api
 	app.post( '/user/register', register )
 	app.post( '/user/signin', signin )
+
+	//file upload
+	app.post( '/upload/getuptoken', genUpToken)
+	app.post( '/upload/uploadcallback', uploadCallback )
 }

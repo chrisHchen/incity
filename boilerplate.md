@@ -14,5 +14,15 @@ Serves up a static directory for images and other assets that we don't (yet) req
 ##code splitting
 
 
+***
+##useful url
+* test uptoken 
+http://jsfiddle.net/gh/get/extjs/4.2/icattlecoder/jsfiddle/tree/master/uptoken
+* ajaxupload example
+http://jsfiddle.net/gh/get/jquery/1.9.1/icattlecoder/jsfiddle/tree/master/ajaxupload
+* put-policy
+http://developer.qiniu.com/article/developer/security/put-policy.html
+
+
 
 
