@@ -1,7 +1,9 @@
 import config from '../../../config/qiniu'
 import qiniu from 'qiniu'
+import { savePhoto } from './photo'
 
 export const genUpToken = (req, res) => {
+
 	const { ACCESS_KEY, SECRET_KEY, put_policy } = config
 	qiniu.conf.ACCESS_KEY = ACCESS_KEY
 	qiniu.conf.SECRET_KEY = SECRET_KEY
@@ -19,6 +21,7 @@ export const genUpToken = (req, res) => {
 	  putPolicy.callbackBody = put_policy.callbackBody
 	  putPolicy.callbackFetchKey = put_policy.callbackFetchKey
 	  putPolicy.fsizeLimit = put_policy.fsizeLimit
+	  putPolicy.endUser = req.session.user._id // 后期改为name
 	  putPolicy.mimeLimit = put_policy.mimeLimit
 	  return putPolicy.token()
 	}
@@ -32,14 +35,6 @@ export const genUpToken = (req, res) => {
 
 
 export const uploadCallback = (req, res) => {
-	const reqBody = req.body
-	const fileName = new Date().getTime() + '' + parseInt(Math.random()*100000)
-	res.setHeader('Content-Type', 'application/json;charset=utf-8')
-	res.json({
-		key: fileName,
-		payload:{
-			isSuccess: true,
-			fileName: fileName
-		}
-	})
+
+	savePhoto(req, res)
 } 

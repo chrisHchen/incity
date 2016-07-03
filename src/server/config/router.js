@@ -1,14 +1,14 @@
 import { signinRequired } from '../app/controllers/user'
 import Index from '../app/controllers/index'
-import {register, signin} from '../app/controllers/user'
-import {genUpToken, uploadCallback} from '../app/controllers/upload'
+import { register, signin } from '../app/controllers/user'
+import { genUpToken, uploadCallback } from '../app/controllers/upload'
 import config from '../../config'
 
 export default function(app){
 
 	//pre handler 
 	app.use( (req, res, next) => {
-		
+		// console.log(req.session.user)
 		if( config.apiUrl.indexOf(req.path) >= 0 ){
 			return next()
 		}

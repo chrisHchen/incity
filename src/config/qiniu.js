@@ -8,7 +8,7 @@ const config = {
 		insertOnly: 1,
 		returnBody: '{"key": $(key), "hash": $(etag), "w": $(imageInfo.width), "h": $(imageInfo.height)}',
 		callbackUrl: 'http://476893435.tunnel.2bdata.com/upload/uploadcallback',
-		callbackBody: '{w=$(imageInfo.width)&h=$(imageInfo.height)}',
+		callbackBody: 'format=$(imageInfo.format)&width=$(imageInfo.width)&height=$(imageInfo.height)&endUser=$(endUser)',
 		mimeLimit : 'image/*',
 		callbackFetchKey: 1,
 		fsizeLimit: 1024*1024*8
