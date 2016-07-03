@@ -8,7 +8,7 @@ export default function(app){
 
 	//pre handler 
 	app.use( (req, res, next) => {
-
+		
 		if( config.apiUrl.indexOf(req.path) >= 0 ){
 			return next()
 		}
@@ -21,14 +21,15 @@ export default function(app){
 		next()
 	})
 
-	//server sider rendering
-	app.get( '/*', Index )
-
+	
 	//user api
 	app.post( '/user/register', register )
 	app.post( '/user/signin', signin )
 
 	//file upload
-	app.post( '/upload/getuptoken', genUpToken)
+	app.get( '/upload/getuptoken', genUpToken)
 	app.post( '/upload/uploadcallback', uploadCallback )
+
+	//server sider rendering
+	app.get( '/*', Index )
 }

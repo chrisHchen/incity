@@ -21,9 +21,11 @@ CreateBox.propTypes = {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {	
-		
+		upload: (e) => {
+			dispatch( upload(e.target) )
+		}
 	}
 }
 
-CreateBox = connect(null, mapDispatchToProps)(RegisterBox)
+CreateBox = connect(null, mapDispatchToProps)(CreateBox)
 export default CreateBox

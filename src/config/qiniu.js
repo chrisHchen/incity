@@ -4,14 +4,16 @@ const config = {
 	SECRET_KEY: 'FryBGknaS6Ojjzm5v12NBoqi9ktmHvuMIUPtvmEQ',
 	put_policy: {
 		scope: 'incity',
-		deadline: parseInt( (new Date().getTime() + 8*3600*1000)/1000 ),
+		// deadline: parseInt( (new Date().getTime() + 8*3600*1000)/1000 ),
 		insertOnly: 1,
 		returnBody: '{"key": $(key), "hash": $(etag), "w": $(imageInfo.width), "h": $(imageInfo.height)}',
-		callbackUrl: 'http://9ea67ecd.ngrok.io//upload/uploadcallback',
-		callbackHost: 'http://9ea67ecd.ngrok.io',
-		callbackBody: '{key=$(key)&hash=$(etag)&w=$(imageInfo.width)&h=$(imageInfo.height)}',
+		callbackUrl: 'http://476893435.tunnel.2bdata.com/upload/uploadcallback',
+		callbackBody: '{w=$(imageInfo.width)&h=$(imageInfo.height)}',
+		mimeLimit : 'image/*',
 		callbackFetchKey: 1,
 		fsizeLimit: 1024*1024*8
 	},
 	Qiniu_UploadUrl: 'http://up.qiniu.com'
 }
+
+export default config
