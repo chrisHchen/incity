@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 const Input = ( {name, cls, ...more} ) => {
-	const clsName = {
+	const clsName = classnames({
 		'dft_input' : true,
 		'cls'       : !!cls
-	}
+	})
 	
 	return (
 		<input className={clsName} name={name} {...more}/>

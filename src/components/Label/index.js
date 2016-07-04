@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames';
 
 const Label = ({ children, cls }) => {
-	const clsName = {
+	const clsName = classnames({
 		'dft_label' : true,
 		'cls'       : !!cls
-	}
+	})
 
   return(
   	<label className={clsName}>

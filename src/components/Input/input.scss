@@ -1,0 +1,18 @@
+.dft_input{
+	  border-radius: 0;
+    border: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-shadow: 1px 0px 1px rgba(0,0,0,.4) inset;
+    outline: 0;
+    padding: 6px 12px;
+    color:#444;
+    font-size: 14px;
+    &:focus{
+    	border-color: #66afe9;
+    	outline: 0;
+    	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(0,0,0,0.6);
+    }
+}

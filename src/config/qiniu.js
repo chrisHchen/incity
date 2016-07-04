@@ -11,7 +11,7 @@ const config = {
 		callbackBody: 'format=$(imageInfo.format)&width=$(imageInfo.width)&height=$(imageInfo.height)&endUser=$(endUser)',
 		mimeLimit : 'image/*',
 		callbackFetchKey: 1,
-		fsizeLimit: 1024*1024*8
+		fsizeLimit: 1024*1024*2
 	},
 	Qiniu_UploadUrl: 'http://up.qiniu.com'
 }

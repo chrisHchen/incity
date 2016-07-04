@@ -1,5 +1,8 @@
 {
   "watch": [
-    "src/server"
+    "src/server",
+    "src/client/index.js",
+    "src/components/*",
+    "src/routes/*"
   ]
 }

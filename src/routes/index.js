@@ -1,4 +1,3 @@
-import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 
 // polyfill webpack require.ensure
@@ -6,7 +5,6 @@ if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
 // root route
 export const createRoutes = (store) => ({
   path: '/',
-  component: CoreLayout,
   indexRoute: Home,
   getChildRoutes(location, cb){
     require.ensure([], (require) => {
