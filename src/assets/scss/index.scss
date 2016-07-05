@@ -1,0 +1,11 @@
+//basic
+@import "_variables";
+@import  './reset.scss';
+@import  './common.scss';
+
+//layout
+@import  '../../layouts/index.scss';
+
+//components
+@import  '../../components/Input/input.scss';
+@import  '../../components/ComboInput/comboInput.scss';
