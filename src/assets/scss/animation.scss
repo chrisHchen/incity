@@ -1,0 +1,31 @@
+//fadeInOut
+.fadeInOut-enter {
+  opacity: 0.5;
+  transform:translateX(100%);
+}
+
+.fadeInOut-enter.fadeInOut-enter-active {
+  opacity: 1;
+  transform:translateX(0);
+  z-index:10;
+  transition: all 500ms ease-in-out;
+}
+
+.fadeInOut-leave {
+  opacity: 0.3;
+  transform:translateX(0);
+}
+
+.fadeInOut-leave.fadeInOut-leave-active {
+  opacity: 0.01;
+  transform:translateX(-100%);
+  transition: all 600ms ease;
+}
+
+.fadeInOut-appear {
+  opacity: 0.01;
+}
+.fadeInOut-appear.fadeInOut-appear-active {
+  opacity: 1;
+  transition: opacity 2500ms ease-out;
+}

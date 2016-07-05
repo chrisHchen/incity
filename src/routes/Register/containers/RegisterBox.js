@@ -1,21 +1,21 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 
-import Input from '../../../components/Input'
-import Label from '../../../components/Label'
+import ComboInput from '../../../components/ComboInput'
+import PageLayout from '../../../layouts/PageLayout'
 import { getValue, submitReg } from '../actions'
 
 let RegisterBox = ({ handleChange, submitReg }) =>{
 
 	return(
-			<div>
-				<div>注册</div>
-				<Label>用户名</Label><Input  onChange={handleChange('userName')}/>
-				<Label>密码</Label><Input  onChange={handleChange('password')} type='password'/>
-				<div>
-					<button onClick={submitReg}>提交</button>
-				</div>
-			</div>
+		<div  style={{width:'100%',height:'100%',position:'absolute',left:0,top:0,backgroundColor:'#fff'}} key='register'>
+			<ComboInput 
+				handleChange={handleChange} 
+				submitHandler={submitReg} 
+				path='/login'
+				btnText='注册'
+				linkText='已经有账号？我要登录'/>
+		</div>
 	)
 }
 

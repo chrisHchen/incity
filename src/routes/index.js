@@ -1,10 +1,11 @@
 import Home from './Home'
-
+import PageLayout from '../layouts/PageLayout'
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
 // root route
 export const createRoutes = (store) => ({
   path: '/',
+  component: PageLayout,
   indexRoute: Home,
   getChildRoutes(location, cb){
     require.ensure([], (require) => {

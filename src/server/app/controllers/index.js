@@ -20,7 +20,7 @@ const renderFullPage = (html, initialState) => {
         <link rel="stylesheet" type="text/css" href="/build/${ isDeveloping ? 'incity.css' : 'incity.min.css'}">
       </head>
       <body>
-        <div style='width:100%;height:100%' id="root">${html}</div>
+        <div style='height:100%;min-width:300px;max-width:640px;margin:0 auto;padding:0;overflow-x:hidden;position:relative' id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
