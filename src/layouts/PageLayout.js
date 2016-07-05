@@ -2,6 +2,13 @@ import React,{ Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
+// const FirstChild = React.createClass({
+//   render: function() {
+//     var children = React.Children.toArray(this.props.children);
+//     return children[0] || null;
+//   }
+// })
+
 class PageLayout extends Component{
 	render(){
 		const {cls, transitionName='fadeInOut'} = this.props
@@ -10,12 +17,16 @@ class PageLayout extends Component{
 			'cls'       : !!cls
 		})
 		return(
-		  <div className={clsName}>
-		  	{<ReactCSSTransitionGroup style={{width:'100%',height:'100%',position:'absolute',left:0,top:0}} component="div" transitionName={transitionName} transitionAppear={true} transitionAppearTimeout={2500} transitionEnterTimeout={500} transitionLeaveTimeout={600}>
-		      { React.cloneElement(this.props.children,{ key: this.props.location.pathname }) }
-		    </ReactCSSTransitionGroup>}
-		    {/*this.props.children*/}
-		  </div>
+		  	<ReactCSSTransitionGroup 
+		  		className= { clsName }
+		  		component='div' 
+		  		transitionName={transitionName} 
+		  		transitionAppear={true} 
+		  		transitionAppearTimeout={2500} 
+		  		transitionEnterTimeout={500} 
+		  		transitionLeaveTimeout={600}>
+		      { React.cloneElement(this.props.children || <div /> ,{ key: this.props.location.pathname }) }
+		    </ReactCSSTransitionGroup>
 		)
 	}
 }

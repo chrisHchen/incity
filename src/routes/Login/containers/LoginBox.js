@@ -8,7 +8,7 @@ import { getValue, submitLogin } from '../actions'
 let LoginBox = ({ handleChange, submitLogin }) =>{
 
 	return(
-		<div style={{width:'100%',height:'100%',position:'absolute',left:0,top:0,backgroundColor:'#fff'}} key='login'>
+		<div className='pageLayout'>
 			<ComboInput 
 				handleChange={handleChange} 
 				submitHandler={submitLogin} 
