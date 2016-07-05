@@ -13,8 +13,8 @@ let RegisterBox = ({ handleChange, submitReg }) =>{
 				handleChange={handleChange} 
 				submitHandler={submitReg} 
 				path='/login'
-				btnText='注册'
-				linkText='已经有账号？我要登录'/>
+				btnText='注  册'
+				linkText='我要登录~'/>
 		</div>
 	)
 }

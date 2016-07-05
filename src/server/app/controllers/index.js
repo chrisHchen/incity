@@ -17,6 +17,7 @@ const renderFullPage = (html, initialState) => {
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <title>incity</title>
+        <link rel="stylesheet" type="text/css" href="//apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/build/${ isDeveloping ? 'incity.css' : 'incity.min.css'}">
       </head>
       <body>

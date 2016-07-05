@@ -13,6 +13,9 @@ html,body{
 	-moz-box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
+.color-default{
+	color:$base-font-color !important; 
+}
 a{
 	color:#3b3f45;
 }

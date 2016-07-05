@@ -13,7 +13,7 @@ let LoginBox = ({ handleChange, submitLogin }) =>{
 				handleChange={handleChange} 
 				submitHandler={submitLogin} 
 				path='/register'
-				btnText='登录'
+				btnText='登  录'
 				linkText='还没账号？赶紧注册'
 				/>
 		</div>

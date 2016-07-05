@@ -19,10 +19,12 @@ const ComboInput = ({
 	return(
 		<div className='comboInput-wrap'>
 			<div className='item-wrap'>
-				<Input onChange={handleChange('userName')}/>
+				<Input onChange={handleChange('userName')} placeholder='请输入用户名'/>
+				<i className="fa fa-user-md fa-fw fa-lg color-default" aria-hidden="true"></i>
 			</div>
 			<div className='item-wrap'>
-				<Input onChange={handleChange('password')} type='password'/>
+				<Input onChange={handleChange('password')} type='password' placeholder='请输入密码'/>
+				<i className="fa fa-lock fa-fw fa-lg color-default" aria-hidden="true"></i>
 			</div>
 
 			<a className={classname} onClick={submitHandler}>{btnText}</a>

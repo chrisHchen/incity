@@ -22,7 +22,7 @@ class PageLayout extends Component{
 		  		component='div' 
 		  		transitionName={transitionName} 
 		  		transitionAppear={true} 
-		  		transitionAppearTimeout={2500} 
+		  		transitionAppearTimeout={1500} 
 		  		transitionEnterTimeout={500} 
 		  		transitionLeaveTimeout={600}>
 		      { React.cloneElement(this.props.children || <div /> ,{ key: this.props.location.pathname }) }
