@@ -6,17 +6,27 @@ import { match, Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from '../store/createStore'
 import { Provider } from 'react-redux';
+import Immutable from 'immutable'
 
 import '../assets/scss/index.js'
 
-const initialState = window.__INITIAL_STATE__;
+// first immutify initialState as it was stringified before rendered to window.window.INITIAL_STATE
+const immutifyInitState = (initState) => {
+  Object.keys(initState).forEach( (key, index) => {
+    initState[key] = Immutable.fromJS( initState[key] )
+  })
+  return initState
+}
+
+const initialState = immutifyInitState( window.INITIAL_STATE )
+// console.log(initialState)
 const store = createStore(initialState, browserHistory)
-const { dispatch } = store;
+const { dispatch } = store
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.routing
 })
-const { pathname, search, hash } = window.location;
-const location = `${pathname}${search}${hash}`;
+const { pathname, search, hash } = window.location
+const location = `${pathname}${search}${hash}`
 const MOUNT_NODE = document.getElementById('root')
 
 if (__DEBUG__) {
@@ -61,13 +71,13 @@ let render = () => {
       // Don't fetch data for initial route, server has already done the work:
       if (window.INITIAL_STATE) {
         // Delete initial data so that subsequent data fetches can occur:
-        delete window.INITIAL_STATE;
+        delete window.INITIAL_STATE
       } else {
         // Fetch mandatory data dependencies for 2nd route change onwards:
-        trigger('fetch', components, locals);
+        trigger('fetch', components, locals)
       }
       // Fetch deferred, client-only data dependencies:
-      trigger('defer', components, locals);
+      trigger('defer', components, locals)
     })
   })
 }
@@ -84,3 +94,4 @@ if (__DEVTOOLS__) {
   const showDevTools = require('./showDevTools').default;
   showDevTools(store);
 }
+

@@ -1,9 +1,20 @@
 import User from '../models/user'
-
+import config from '../../../config'
+import { regValid } from '../../../common/util'
 const register = (req, res) => {
 	const _user = {}
 	_user.userName = req.body.userName
 	_user.password = req.body.password
+
+	//validate
+	if( !_user.userName || !_user.password || 
+			!regValid( config.userNameReg, _user.userName) || 
+			!regValid( config.userNameReg, _user.userName)) 
+		return res.json({
+				isSuccess:false,
+				errorCode:1,
+				msg:'用户名或密码需6-16位数字，字母，下划线组成'
+		})
 
 	User.findOne({userName:_user.userName}, function(err, user){
 		if(err){
@@ -37,9 +48,18 @@ const register = (req, res) => {
 }
 
 const signin = (req, res) => {
-	var _user = req.body
-	var userName = _user.userName
-	var password = _user.password
+	const _user = req.body
+	const userName = _user.userName
+	const password = _user.password
+
+	//validate
+	if( !regValid( config.userNameReg, userName) || 
+			!regValid( config.userNameReg, password)) 
+		return res.json({
+				isSuccess:false,
+				errorCode:1,
+				msg:'用户名或密码需6-16位数字，字母，下划线组成'
+		})
 
 	User.findOne({userName:userName}, function(err, user){
 		if(err){

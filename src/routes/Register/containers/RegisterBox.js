@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 
 import ComboInput from '../../../components/ComboInput'
 import PageLayout from '../../../layouts/PageLayout'
+import Toast from '../../../components/Toast'
 import { getValue, submitReg } from '../actions'
 
-let RegisterBox = ({ handleChange, submitReg }) =>{
+let RegisterBox = ({ handleChange, submitReg, toastDesc, toastShow }) =>{
 
 	return(
 		<div className='pageLayout'>
@@ -15,6 +16,7 @@ let RegisterBox = ({ handleChange, submitReg }) =>{
 				path='/login'
 				btnText='注  册'
 				linkText='我要登录~'/>
+			{toastShow && <Toast description={toastDesc} show={true}/>}
 		</div>
 	)
 }
@@ -36,5 +38,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-RegisterBox = connect(null, mapDispatchToProps)(RegisterBox)
+const mapStateToProps = (state, ownProps) => {
+	return {
+		toastDesc:state.register.get('toastDesc'),
+		toastShow:state.register.get('toastShow')
+	}
+}
+
+RegisterBox = connect( mapStateToProps, mapDispatchToProps)(RegisterBox)
 export default RegisterBox

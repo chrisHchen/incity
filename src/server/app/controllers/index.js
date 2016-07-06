@@ -6,6 +6,7 @@ import { trigger } from 'redial'
 import createRoutes from '../../../routes'
 import createStore from '../../../store/createStore'
 
+
 const isDeveloping = process.env.NODE_ENV == 'development'
 const renderFullPage = (html, initialState) => {
   return `
@@ -23,7 +24,7 @@ const renderFullPage = (html, initialState) => {
       <body>
         <div style='height:100%;min-width:300px;max-width:640px;margin:0 auto;padding:0;overflow-x:hidden;position:relative' id="root">${html}</div>
         <script>
-          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
+          window.INITIAL_STATE = ${JSON.stringify(initialState)};
         </script>
         <script src="/build/${ isDeveloping ? 'vendor.js' : 'vendor.min.js'}"></script>
         <script src="/build/${ isDeveloping ? 'incity.js' : 'incity.min.js'}"></script>
@@ -68,7 +69,7 @@ export default function index (req, res) {
     //https://github.com/markdalgleish/redial
     trigger('fetch', components, locals)
       .then(() => {
-        const initialState = store.getState();
+        const initialState = store.getState()
         const InitialView = (
           <Provider store={store}>
             <RouterContext {...renderProps} />
