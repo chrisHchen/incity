@@ -2,11 +2,9 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { processAnimation } from '../../../common/util'
 import ComboInput from '../../../components/ComboInput'
-import PageLayout from '../../../layouts/PageLayout'
-import Toast from '../../../components/Toast'
 import { getValue, submitLogin } from '../actions'
 
-let LoginBoxAnim = ({ handleChange, submitLogin, toastDesc, toastShow }) =>{
+let LoginBoxAnim = ({ handleChange, submitLogin }) =>{
 
 	return(
 		<div>
@@ -17,13 +15,13 @@ let LoginBoxAnim = ({ handleChange, submitLogin, toastDesc, toastShow }) =>{
 				btnText='登  录'
 				linkText='还没账号？赶紧注册'
 				/>
-			<Toast description={toastDesc} show={toastShow}/>
 		</div>
 	)
 }
 
 LoginBoxAnim.propTypes = {
-	handleChange: PropTypes.func
+	handleChange: PropTypes.func,
+	submitLogin : PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -39,14 +37,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	return {
-		toastDesc:state.login.get('toastDesc'),
-		toastShow:state.login.get('toastShow')
-	}
-}
-
-LoginBoxAnim = connect( mapStateToProps, mapDispatchToProps)(LoginBoxAnim)
+LoginBoxAnim = connect( null, mapDispatchToProps)(LoginBoxAnim)
 
 class LoginBox extends Component{
 	componentWillAppear(callback){

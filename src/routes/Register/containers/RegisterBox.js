@@ -2,27 +2,23 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { processAnimation } from '../../../common/util'
 import ComboInput from '../../../components/ComboInput'
-import PageLayout from '../../../layouts/PageLayout'
-import Toast from '../../../components/Toast'
 import { getValue, submitReg } from '../actions'
 
-let RegisterBoxAnim = ({ handleChange, submitReg, toastDesc, toastShow }) =>{
+let RegisterBoxAnim = ({ handleChange, submitReg }) =>{
 
 	return(
-		<div className='pageLayout'>
-			<ComboInput 
-				handleChange={handleChange} 
-				submitHandler={submitReg} 
-				path='/login'
-				btnText='注  册'
-				linkText='我要登录~'/>
-			{toastShow && <Toast description={toastDesc} show={true}/>}
-		</div>
+		<ComboInput 
+			handleChange={handleChange} 
+			submitHandler={submitReg} 
+			path='/login'
+			btnText='注  册'
+			linkText='我要登录~'/>
 	)
 }
 
 RegisterBoxAnim.propTypes = {
-	handleChange: PropTypes.func
+	handleChange: PropTypes.func,
+	submitReg   : PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -38,14 +34,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	return {
-		toastDesc:state.register.get('toastDesc'),
-		toastShow:state.register.get('toastShow')
-	}
-}
-
-RegisterBoxAnim = connect( mapStateToProps, mapDispatchToProps)(RegisterBoxAnim)
+RegisterBoxAnim = connect( null, mapDispatchToProps)(RegisterBoxAnim)
 
 class RegisterBox extends Component{
 	componentWillAppear(callback){
