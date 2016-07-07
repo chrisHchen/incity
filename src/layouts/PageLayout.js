@@ -1,6 +1,7 @@
 import React,{ Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactTransitionGroup from 'react-addons-transition-group'
 
 // const FirstChild = React.createClass({
 //   render: function() {
@@ -17,7 +18,8 @@ class PageLayout extends Component{
 			'cls'       : !!cls
 		})
 		return(
-		  	<ReactCSSTransitionGroup 
+			<ReactTransitionGroup component='div' className= { clsName }>
+		  	{/*<ReactCSSTransitionGroup 
 		  		className= { clsName }
 		  		component='div' 
 		  		transitionName={transitionName} 
@@ -26,7 +28,9 @@ class PageLayout extends Component{
 		  		transitionEnterTimeout={500} 
 		  		transitionLeaveTimeout={600}>
 		      { React.cloneElement(this.props.children || <div /> ,{ key: this.props.location.pathname }) }
-		    </ReactCSSTransitionGroup>
+		    </ReactCSSTransitionGroup>*/}
+		    { React.cloneElement(this.props.children || <div /> ,{ key: this.props.location.pathname }) }
+		  </ReactTransitionGroup>
 		)
 	}
 }

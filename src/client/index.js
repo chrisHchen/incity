@@ -7,7 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from '../store/createStore'
 import { Provider } from 'react-redux';
 import Immutable from 'immutable'
-
+import { requestAnimationFramePollyfill } from '../common/util'
 import '../assets/scss/index.js'
 
 // first immutify initialState as it was stringified before rendered to window.window.INITIAL_STATE
@@ -89,7 +89,7 @@ if (module.hot) {
 }
 
 render()
-
+requestAnimationFramePollyfill()
 if (__DEVTOOLS__) {
   const showDevTools = require('./showDevTools').default;
   showDevTools(store);

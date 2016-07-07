@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-
+import { processAnimation } from '../../../common/util'
 import ComboInput from '../../../components/ComboInput'
 import PageLayout from '../../../layouts/PageLayout'
 import Toast from '../../../components/Toast'
 import { getValue, submitReg } from '../actions'
 
-let RegisterBox = ({ handleChange, submitReg, toastDesc, toastShow }) =>{
+let RegisterBoxAnim = ({ handleChange, submitReg, toastDesc, toastShow }) =>{
 
 	return(
 		<div className='pageLayout'>
@@ -21,7 +21,7 @@ let RegisterBox = ({ handleChange, submitReg, toastDesc, toastShow }) =>{
 	)
 }
 
-RegisterBox.propTypes = {
+RegisterBoxAnim.propTypes = {
 	handleChange: PropTypes.func
 }
 
@@ -45,5 +45,28 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
-RegisterBox = connect( mapStateToProps, mapDispatchToProps)(RegisterBox)
+RegisterBoxAnim = connect( mapStateToProps, mapDispatchToProps)(RegisterBoxAnim)
+
+class RegisterBox extends Component{
+	componentWillAppear(callback){
+		const el = this.refs.register
+		processAnimation(el, 'fadeInOut-appear', 'fadeInOut-appear-active', 1500, callback)
+	}
+	componentWillEnter(callback){
+		const el = this.refs.register
+		processAnimation(el, 'right-enter', 'right-enter-active', 500, callback)
+	}
+	componentWillLeave(callback){
+		const el = this.refs.register
+		processAnimation(el, 'right-leave', 'right-leave-active', 600, callback)
+	}
+	render(){
+		return(
+			<div className='pageLayout' ref='register'>
+					<RegisterBoxAnim />
+			</div>
+		)
+	}
+}
+
 export default RegisterBox

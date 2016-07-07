@@ -1,27 +1,53 @@
-//fadeInOut
-.fadeInOut-enter {
+//enter
+.right-enter {
   opacity: 0.5;
-  transform:translateX(100%);
+  transform:translate3d(100%,0,0);
 }
 
-.fadeInOut-enter.fadeInOut-enter-active {
+.right-enter.right-enter-active {
   opacity: 1;
-  transform:translateX(0);
+  transform:translate3d(0,0,0);
   z-index:10;
   transition: all 500ms ease-in-out;
 }
 
-.fadeInOut-leave {
-  opacity: 0.3;
-  transform:translateX(0);
+.left-enter {
+  opacity: 0.5;
+  transform:translate3d(-100%,0,0);
 }
 
-.fadeInOut-leave.fadeInOut-leave-active {
+.left-enter.left-enter-active {
+  opacity: 1;
+  transform:translate3d(0,0,0);
+  z-index:10;
+  transition: all 500ms ease-in-out;
+}
+
+
+//leave
+.right-leave {
+  opacity: 0.3;
+  transform:translate3d(0,0,0);
+}
+
+.right-leave.right-leave-active {
   opacity: 0.01;
-  transform:translateX(-100%);
+  transform:translate3d(100%,0,0);
   transition: all 600ms ease;
 }
 
+.left-leave {
+  opacity: 0.3;
+  transform:translate3d(0,0,0);
+}
+
+.left-leave.left-leave-active {
+  opacity: 0.01;
+  transform:translate3d(-100%,0,0);
+  transition: all 600ms ease;
+}
+
+//appear
 .fadeInOut-appear {
   opacity: 0.01;
 }
