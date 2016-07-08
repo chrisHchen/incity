@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import classnames from 'classnames';
+import classnames from 'classnames'
 
 const Label = ({ children, cls }) => {
 	const clsName = classnames({
