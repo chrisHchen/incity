@@ -4,61 +4,74 @@ import touchStyles from './style'
 
 const _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }
 
-export default getComponent = (decorator) => {
-	
+const getComponent = (decorator) => {
 	return (
-	@decorator
-	class Movable extends Component{
-		constructor(props) {
-    	super(props)
-  	}
+		@decorator
+		class Movable extends Component{
+			constructor(props) {
+	    	super(props)
+	    	this.state = {
+	    		isActive: false
+	    	}
 
-		static propTypes = {
-			component: React.PropTypes.any,           // component to create
-			className: React.PropTypes.string,        // optional className
-			classBase: React.PropTypes.string,        // base for generated classNames
-			classes: React.PropTypes.object,          // object containing the active and inactive class names
-			style: React.PropTypes.object,            // additional style properties for the component
-		}
+	    	this.handlersObj = this.handlers()
+				const keys = Object.keys(this.handlersObj)
+				keys.forEach((key, _) => {
+					this.handlersObj[key] = this.handlersObj[key].bind(this)
+				})
+	  	}
 
-		static defaultProps = {
-			component: 'span',
-			classBase: 'movable',
-			pressDelay: 1000,
-			moveThreshold: 100,
-			pressMoveThreshold: 5,
-			isActive: false
-		}
+			static propTypes = {
+				component: React.PropTypes.any,           // component to create
+				className: React.PropTypes.string,        // optional className
+				classBase: React.PropTypes.string,        // base for generated classNames
+				classes: React.PropTypes.object,          // object containing the active and inactive class names
+				style: React.PropTypes.object,            // additional style properties for the component
+			}
 
-		render(){
-			const props = this.props
+			static defaultProps = {
+				component: 'span',
+				classBase: 'movable',
+				pressDelay: 1000,
+				moveThreshold: 100,
+				pressMoveThreshold: 5
+			}
 
-			const classname = classnames({
-				[`${props.classBase + (this.state.isActive ? '-active' : '-inactive')}`] 		: true,
-				[props.className] 																													: !!props.className,
-				[`${this.state.isActive ? props.classes.active : props.classes.inactive}`] 	: !!props.classes
-			})
+			render(){
+				const props = this.props
+				const classnameObj = {
+					[`${props.classBase + (this.state.isActive ? '-active' : '-inactive')}`] 		: true,
+					[props.className] 																													: !!props.className
+				}
 
-			const style = {}
-			_extends(style, touchStyles, props.style)
+				if(props.classes){
+					classnameObj[`${this.state.isActive ? props.classes.active : props.classes.inactive}`] 	= true
+				}
 
-			const newComponentProps = _extends({}, props, {
-				style: style,
-				className: className,
-				handlers: this.handlers
-			}, this.handlers())
+				const classname = classnames(classnameObj)
 
-			delete newComponentProps.onTap
-			delete newComponentProps.onPress
-			delete newComponentProps.pressDelay
-			delete newComponentProps.pressMoveThreshold
-			delete newComponentProps.moveThreshold
-			delete newComponentProps.onMoveEnd
-			delete newComponentProps.preventDefault
-			delete newComponentProps.stopPropagation
-			delete newComponentProps.component
+				const style = {}
+				_extends(style, touchStyles, props.style)
 
-			return React.createElement(props.component, newComponentProps, props.children)
-		}
-	})
+				const newComponentProps = _extends({}, props, {
+					style: style,
+					className: classname,
+				}, this.handlersObj )
+				
+				delete newComponentProps.onTap
+				delete newComponentProps.onPress
+				delete newComponentProps.pressDelay
+				delete newComponentProps.pressMoveThreshold
+				delete newComponentProps.moveThreshold
+				delete newComponentProps.onMoveEnd
+				delete newComponentProps.preventDefault
+				delete newComponentProps.stopPropagation
+				delete newComponentProps.component
+				delete newComponentProps.classBase
+
+				return React.createElement(props.component, newComponentProps, props.children)
+			}
+		})
 }
+
+export default getComponent

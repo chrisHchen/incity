@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
+const _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }
+
 function getTouchProps(touch) {
 	if (!touch) return {}
 	return {
@@ -12,20 +14,21 @@ function getTouchProps(touch) {
 }
 
 function Decorator(target){
-	const mixin = {
 
-		componentWillUnmount: function componentWillUnmount() {
+	target.prototype = _extends(target.prototype,{
+
+		componentWillUnmount() {
 			this.cleanupScrollDetection();
 			this.cancelPressDetection();
 			this.clearActiveTimeout();
 		},
 
-		processEvent: function processEvent(event) {
+		processEvent(event) {
 			if (this.props.preventDefault) event.preventDefault();
 			if (this.props.stopPropagation) event.stopPropagation();
 		},
 
-		onTouchStart: function onTouchStart(event) {
+		onTouchStart(event) {
 			//fire native touchStart and if it returns false then return as to stop the immediate propagation
 			if (this.props.onTouchStart && this.props.onTouchStart(event) === false) return
 			this.processEvent(event)
@@ -34,24 +37,23 @@ function Decorator(target){
 				this._initialTouch = this._lastTouch = getTouchProps(event.touches[0])
 				this.initScrollDetection()
 				this.initPressDetection(event, this.endTouch)
-				this._activeTimeout = setTimeout(this.makeActive, 0)
+				this._activeTimeout = setTimeout(this.makeActive.bind(this), 0)
 			}
 		},
 
-		makeActive: function makeActive() {
-			if (!this.isMounted()) return
+		makeActive() {
 			this.clearActiveTimeout()
 			this.setState({
 				isActive: true
 			})
 		},
 
-		clearActiveTimeout: function clearActiveTimeout() {
+		clearActiveTimeout() {
 			clearTimeout(this._activeTimeout)
 			this._activeTimeout = false
 		},
 
-		initScrollDetection: function initScrollDetection() {
+		initScrollDetection() {
 			this._scrollPos = { top: 0, left: 0 }
 			this._scrollParents = []
 			this._scrollParentPos = []
@@ -69,14 +71,14 @@ function Decorator(target){
 			}
 		},
 
-		calculateMovement: function calculateMovement(touch) {
+		calculateMovement(touch) {
 			return {
 				x: Math.abs(touch.clientX - this._initialTouch.clientX),
 				y: Math.abs(touch.clientY - this._initialTouch.clientY)
 			}
 		},
 
-		detectScroll: function detectScroll() {
+		detectScroll() {
 			const currentScrollPos = { top: 0, left: 0 }
 			for (let i = 0; i < this._scrollParents.length; i++) {
 				currentScrollPos.top += this._scrollParents[i].scrollTop
@@ -85,12 +87,12 @@ function Decorator(target){
 			return !(currentScrollPos.top === this._scrollPos.top && currentScrollPos.left === this._scrollPos.left)
 		},
 
-		cleanupScrollDetection: function cleanupScrollDetection() {
+		cleanupScrollDetection() {
 			this._scrollParents = undefined
 			this._scrollPos = undefined
 		},
 
-		initPressDetection: function initPressDetection(event, callback) {
+		initPressDetection(event, callback) {
 			if (!this.props.onPress) return
 			this._pressTimeout = setTimeout((function () {
 				this.props.onPress(event)
@@ -100,11 +102,11 @@ function Decorator(target){
 			}).bind(this), this.props.pressDelay)
 		},
 
-		cancelPressDetection: function cancelPressDetection() {
+		cancelPressDetection() {
 			clearTimeout(this._pressTimeout)
 		},
 
-		onTouchMove: function onTouchMove(event) {
+		onTouchMove(event) {
 			if (this._initialTouch) {
 				this.processEvent(event)
 
@@ -134,7 +136,7 @@ function Decorator(target){
 			}
 		},
 
-		onTouchEnd: function onTouchEnd(event) {
+		onTouchEnd(event) {
 			const _this = this
 
 			if (this._initialTouch) {
@@ -159,7 +161,7 @@ function Decorator(target){
 			}
 		},
 
-		endTouch: function endTouch(event, callback) {
+		endTouch(event, callback) {
 			this.cancelPressDetection()
 			this.clearActiveTimeout()
 			if (event && this.props.onTouchEnd) {
@@ -177,13 +179,13 @@ function Decorator(target){
 				})
 			}
 		}
-	}
-
-	target.handlers = () => {
+	})
+	
+	target.prototype.handlers = () => {
 		return {
-			onTouchStart: mixin.onTouchStart,
-			onTouchMove: mixin.onTouchMove,
-			onTouchEnd: mixin.onTouchEnd,
+			onTouchStart: target.prototype.onTouchStart,
+			onTouchMove: target.prototype.onTouchMove,
+			onTouchEnd: target.prototype.onTouchEnd
 		}
 	}
 }
