@@ -65,7 +65,8 @@ module.exports = {
             'react-router',
             'redux',
             'react-redux',
-            'react-router-redux'
+            'react-router-redux',
+            'redux-thunk'
         ]
     },
     resolve: {

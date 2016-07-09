@@ -12,6 +12,11 @@ html,body{
 	-webkit-box-sizing: border-box; 
 	-moz-box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  WebkitUserSelect: 'none';
+  KhtmlUserSelect: 'none';
+  MozUserSelect: 'none';
+  msUserSelect: 'none';
+  userSelect: 'none';
 }
 .color-default{
 	color:$base-font-color !important; 

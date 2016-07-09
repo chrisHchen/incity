@@ -27,9 +27,24 @@ class HomeView extends Component{
 	render(){
 		return(
 			<div ref='homeview'>
-		    <h4>Welcome!</h4>
+		    <h4>welcome</h4>
 		    <Link to='/create'>上传</Link>
-		    <Movable style={{width:'50px',height:'50px',backgroundColor:'green'}}>movable</Movable>
+		    <div style={{height:'1000px'}}>
+		    	<Movable 
+		    		component='div' 
+		    		style={{width:'50px',height:'50px',backgroundColor:'green',display:'block',left:'100px',top:'200px'}}
+		    		shouldReverse={true}
+		    		destination={[
+		    			{
+		    				x:100,
+		    				y:100
+		    			}
+		    		]}>
+		    		<div>haha</div>
+		    	</Movable>
+		    </div>
+		    <div id='test' style={{position:'absolute',left:'100px',top:'100px',width:'1px', height:'1px', backgroundColor:'red'}}>
+		    </div>
 		  </div>
 		)
 	}
