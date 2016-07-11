@@ -1,8 +1,9 @@
-import { GET_LOGIN_VALUE, TOAST_SHOW, TOAST_HIDE } from '../constants'
+import { GET_LOGIN_VALUE, TOAST_SHOW, TOAST_HIDE, GET_LOGIN_INITSTATE } from '../constants'
 import { regValid } from '../../common/util'
 import config from '../../config'
 import { replace } from 'react-router-redux'
 import { fetchJson } from '../../common/fetchUtil' 
+import { validate, destructFormData } from '../../common/util'
 
 export const getValue = (name, value) => {
 	return {	
@@ -12,19 +13,27 @@ export const getValue = (name, value) => {
 	}
 }
 
+export const populateFormState = (initState) => {
+	return {	
+		type: GET_LOGIN_INITSTATE,
+		payload: initState
+	}
+}
+
 export const submitLogin = () => {
 	return (disptach, getState) => {
-		const data = getState().login.toObject()
+		const formData = getState().login.toJS()
 		//validate
-		if( !data.userName || !data.password || !regValid(config.userNameReg, data.userName) || 
-				!regValid(config.passwordReg, data.password)){
-				disptach(showToast('用户名或密码需6-16位数字，字母，下划线组成', disptach))
-				return
-		}
+		const isValid = validate(formData,(msg) => {
+			disptach(showToast(msg, disptach))
+		})
+
+		if(!isValid) return
+
 		fetchJson({
 			url : '/user/signin',
 			type: 'POST',
-			data: data,
+			data: destructFormData(formData),
 			success : (res) => {
 				if(res.isSuccess){
 					disptach( replace('/') )

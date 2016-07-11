@@ -8,7 +8,7 @@ const Input = ( {name, cls, ...more} ) => {
 	})
 	
 	return (
-		<input className={clsName} name={name} {...more}/>
+		<input defaultValue='' className={clsName} name={name} {...more}/>
 	)
 }
 

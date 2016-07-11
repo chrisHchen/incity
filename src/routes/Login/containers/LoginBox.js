@@ -2,15 +2,16 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { processAnimation } from '../../../common/util'
 import ComboInput from '../../../components/ComboInput'
-import { getValue, submitLogin } from '../actions'
+import { getValue, submitLogin, populateFormState } from '../actions'
 
-let LoginBoxAnim = ({ handleChange, submitLogin }) =>{
+let LoginBoxAnim = ({ handleChange, submitLogin, populateFormState }) =>{
 
 	return(
 		<div>
 			<ComboInput 
 				handleChange={handleChange} 
 				submitHandler={submitLogin} 
+				populateFormState={populateFormState}
 				path='/register'
 				btnText='登  录'
 				linkText='还没账号？赶紧注册'
@@ -33,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		submitLogin : () => {
 			dispatch( submitLogin() )
+		},
+		populateFormState:(initState) => {
+			dispatch( populateFormState(initState) )
 		}
 	}
 }
