@@ -6,7 +6,6 @@ const touchStyles = {
   MozUserSelect: 'none',
   msUserSelect: 'none',
   userSelect: 'none',
-  cursor: 'pointer',
   position: 'relative'
 }
 
