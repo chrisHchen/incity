@@ -136,7 +136,7 @@ function Decorator(target){
 			if (this._initialTouch) {
 				this.processEvent(event)
 
-				if (this.detectScroll()) return this.endTouch(event)
+				// if (this.detectScroll()) return this.endTouch(event)
 				//fire native touchMove handler
 				this.props.onTouchMove && this.props.onTouchMove(event)
 				this._lastTouch = getTouchProps(event.touches[0])
@@ -163,19 +163,24 @@ function Decorator(target){
 					}
 				} else { //now it is movable
 					this._movement = this.calculateMovement(this._lastTouch)
-						//delete the initial left and top from props so it wont effect movement result
-						delete this.props.style.left
-						delete this.props.style.top
-						this._initialTouch = this._lastTouch
-						this.requestTick()
+					
+
+					//delete the initial left and top from props so it wont effect movement result
+					delete this.props.style.left
+					delete this.props.style.top
+					this._initialTouch = this._lastTouch
+					this.requestTick()
 				}
 			}
 		},
 
 		requestTick(){
+			this._initPosition.x += this._movement.x
+			this._initPosition.y += this._movement.y
 			if(!this._ticking) {
         requestAnimationFrame(this.update.bind(this))
     	}
+
     	this._ticking = true
 		},
 
@@ -183,11 +188,10 @@ function Decorator(target){
 			this._ticking = false
 
 			this.setState({
-				left:this._initPosition.x + this._movement.x,
-				top:this._initPosition.y + this._movement.y
+				left:this._initPosition.x,
+				top:this._initPosition.y
 			})
-			this._initPosition.x += this._movement.x
-			this._initPosition.y += this._movement.y
+			
 		},
 
 		onTouchEnd(event) {
