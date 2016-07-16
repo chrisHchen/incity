@@ -9,7 +9,7 @@ const savePhoto = (req, res) => {
 	const width = reqBody.width
 	const height = reqBody.height
 	const format = reqBody.format
-
+	const length = reqBody.length
 	const key = new Date().getTime() + '' + parseInt(Math.random()*100000)
 	const _photo = {
 		owner: endUser,

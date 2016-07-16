@@ -10,7 +10,7 @@ let CreateBox = ({ upload }) =>{
 	return(
 			<div>
 				<div>上传图片</div>
-				<Label>照片</Label><Input type='file' onChange={upload}/>
+				<Label>照片</Label><Input type='file' onChange={upload} multiple='multiple'/>
 			</div>
 	)
 }
