@@ -13,7 +13,9 @@ const config = {
 		callbackFetchKey: 1,
 		fsizeLimit: 1024*1024*2
 	},
-	Qiniu_UploadUrl: 'http://up.qiniu.com'
+	Qiniu_UploadUrl: 'http://up.qiniu.com',
+	Qiniu_DownloadDomain: 'http://o9opa6tzl.bkt.clouddn.com/',
+	QIniu_thumbnail_strategy: '?imageView2/1/w/50/h/50'
 }
 
 export default config

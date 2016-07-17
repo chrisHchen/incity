@@ -1,23 +1,26 @@
 import React, { PropTypes, Component } from 'react'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { processAnimation } from '../../../common/util'
 import ComboInput from '../../../components/ComboInput'
 import { getValue, submitReg, populateFormState } from '../actions'
 
-let RegisterBoxAnim = ({ handleChange, submitReg, populateFormState }) =>{
+let RegisterBox = ({ handleChange, submitReg, populateFormState }) =>{
 
 	return(
-		<ComboInput 
-			handleChange={handleChange} 
-			submitHandler={submitReg} 
-			populateFormState={populateFormState}
-			path='/login'
-			btnText='注  册'
-			linkText='我要登录~'/>
+		<div className='pageLayout'>
+			<ComboInput 
+				handleChange={handleChange} 
+				submitHandler={submitReg} 
+				populateFormState={populateFormState}
+				path='/login'
+				btnText='注  册'
+				linkText='我要登录~'/>
+		</div>
 	)
 }
 
-RegisterBoxAnim.propTypes = {
+RegisterBox.propTypes = {
 	handleChange: PropTypes.func,
 	submitReg   : PropTypes.func
 }
@@ -38,28 +41,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-RegisterBoxAnim = connect( null, mapDispatchToProps)(RegisterBoxAnim)
+RegisterBox = connect( null, mapDispatchToProps)(RegisterBox)
 
-class RegisterBox extends Component{
-	componentWillAppear(callback){
-		const el = this.refs.register
-		processAnimation(el, 'fadeInOut-appear', 'fadeInOut-appear-active', 1500, callback)
-	}
-	componentWillEnter(callback){
-		const el = this.refs.register
-		processAnimation(el, 'right-enter', 'right-enter-active', 500, callback)
-	}
-	componentWillLeave(callback){
-		const el = this.refs.register
-		processAnimation(el, 'right-leave', 'right-leave-active', 600, callback)
-	}
-	render(){
-		return(
-			<div className='pageLayout' ref='register'>
-					<RegisterBoxAnim />
-			</div>
-		)
-	}
+RegisterBox.prototype.componentWillAppear = function(callback){
+	const el = ReactDOM.findDOMNode(this)
+	processAnimation(el, 'fadeInOut-appear', 'fadeInOut-appear-active', 1500, callback)
+}
+
+RegisterBox.prototype.componentWillEnter = function(callback){
+	const el = ReactDOM.findDOMNode(this)
+	processAnimation(el, 'right-enter', 'right-enter-active', 500, callback)
+}
+RegisterBox.prototype.componentWillLeave = function(callback){
+	const el = ReactDOM.findDOMNode(this)
+	processAnimation(el, 'right-leave', 'right-leave-active', 600, callback)
 }
 
 export default RegisterBox

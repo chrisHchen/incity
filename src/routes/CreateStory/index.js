@@ -8,8 +8,8 @@ export default (store) => ({
       require.ensure([], ( require ) => {
         const Create = require('./containers/CreateStory').default
         const reducer = require('./reducer').default
-        injectReducer(store, { key: 'create', reducer })
+        injectReducer(store, { key: 'createPhoto', reducer })
         cb( null, Create )
-      }, 'create')
+      }, 'createPhoto')
     }
 })

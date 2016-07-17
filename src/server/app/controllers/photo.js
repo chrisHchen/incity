@@ -54,7 +54,7 @@ const savePhoto = (req, res) => {
 					key: key,
 					payload:{
 						isSuccess: true,
-						fileNames: [key]
+						fileNames: photo.photoList
 					}
 				})
 			})

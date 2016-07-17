@@ -20,23 +20,17 @@ class PageLayout extends Component{
 			'cls'       : !!cls
 		})
 
+		// Only take the first-level part of the path as key, instead of the whole path.
+		const { pathname } = this.props.location
+		const key = pathname.split('/')[1] || 'root'
+
 		return(
-			<div className= { clsName }>
-				<ReactTransitionGroup component='div' >
-			  	{/*<ReactCSSTransitionGroup 
-			  		className= { clsName }
-			  		component='div' 
-			  		transitionName={transitionName} 
-			  		transitionAppear={true} 
-			  		transitionAppearTimeout={1500} 
-			  		transitionEnterTimeout={500} 
-			  		transitionLeaveTimeout={600}>
-			      { React.cloneElement(this.props.children || <div /> ,{ key: this.props.location.pathname }) }
-			    </ReactCSSTransitionGroup>*/}
-			    { React.cloneElement(this.props.children || <div /> ,{ key: this.props.location.pathname }) }
-			  </ReactTransitionGroup>
+				<ReactTransitionGroup 
+				component='div' 
+				className= { clsName }>
+			    { React.cloneElement(this.props.children || <div /> ,{ key: key }) }
 			  {toastShow && <Toast description={toastDesc} show={toastShow}/> }
-		  </div>
+			  </ReactTransitionGroup> 
 		)
 	}
 }

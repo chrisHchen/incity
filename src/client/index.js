@@ -90,8 +90,8 @@ if (module.hot) {
 
 render()
 requestAnimationFramePollyfill()
-// if (__DEVTOOLS__) {
-//   const showDevTools = require('./showDevTools').default;
-//   showDevTools(store);
-// }
+if (__DEVTOOLS__) {
+  const showDevTools = require('./showDevTools').default;
+  showDevTools(store);
+}
 
